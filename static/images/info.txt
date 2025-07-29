@@ -1,0 +1,14 @@
+
+Hope you enjoy your new logo, here are the people that
+made your beautiful logo happen :)
+font name: Renner-Medium
+font link: http://indestructibletype.com/BuyRenner.html
+font author: indestructible type*
+font author site: http://indestructibletype.com/Home.html
+
+
+icon designer: Michael Appleford
+icon designer link: /mappleford2
+        
+{"bg-gradient-0":"#0067F5","bg-gradient-1":"#0DC5E7","icon":"#ffffff","font":"#ffffff","slogan":"#ffffff"}
+      

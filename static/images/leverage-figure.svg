@@ -1,0 +1,53 @@
+<svg height="216" viewBox="0 0 424 216" width="424" xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink" style="font-family: Open sans, sans-serif">
+    <defs>
+        <linearGradient id="a" x1="119.66117%" x2="21.35318%" y1="91.236671%" y2="41.919772%">
+            <stop offset="0" stop-opacity="0"/>
+            <stop offset="1" stop-color="#cb1742" stop-opacity=".846354"/>
+        </linearGradient>
+        <linearGradient id="b" x1="167.137907%" x2="21.35318%" y1="139.473738%" y2="41.919772%">
+            <stop offset="0" stop-opacity="0"/>
+            <stop offset="1" stop-color="#11a4e4"/>
+        </linearGradient>
+        <path id="c" d="m221.5 57.5h115.583507"/>
+        <filter id="d" height="450%" width="102.6%" x="-1.5%" y="-175%">
+            <feGaussianBlur in="SourceAlpha" result="shadowBlurInner1" stdDeviation="1.5"/>
+            <feOffset dx="0" dy="1" in="shadowBlurInner1" result="shadowOffsetInner1"/>
+            <feComposite in="shadowOffsetInner1" in2="SourceAlpha" k2="-1" k3="1" operator="arithmetic"
+                         result="shadowInnerInner1"/>
+            <feColorMatrix in="shadowInnerInner1" type="matrix"
+                           values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0"/>
+        </filter>
+    </defs>
+    <g fill="none" fill-rule="evenodd" transform="">
+        <rect fill-rule="nonzero" height="32" rx="6" stroke="#0079c1" width="86" x="337.5" y="40.5"/>
+        <text fill="#fff" font-size="16" font-weight="300">
+            <tspan x="347" y="63">$100,000</tspan>
+        </text>
+        <rect fill="#0079c1" fill-rule="nonzero" height="33" rx="6" width="87" x="337"/>
+        <text fill="#fff" font-size="16" font-weight="300">
+            <tspan x="355" y="23">$5,000</tspan>
+        </text>
+        <path d="m63 191h206.5l-103.25-159z" fill="url(#a)" fill-rule="nonzero"/>
+        <path d="m118 216h206.5l-103.25-159z" fill="url(#b)" fill-rule="nonzero"/>
+        <text fill="#fff" font-size="16" font-weight="300">
+            <tspan x="0" y="66">Capital required</tspan>
+            <tspan x="0" y="85">$100,000</tspan>
+        </text>
+        <text fill="#fff" font-size="16" font-weight="300">
+            <tspan x="192" y="36">Exposure</tspan>
+        </text>
+        <text fill="#fff" font-size="16" font-weight="300">
+            <tspan x="292" y="21">Profit</tspan>
+        </text>
+        <g fill-rule="nonzero">
+            <g stroke-linecap="square">
+                <use fill="#000" filter="url(#d)" xlink:href="#c"/>
+                <use stroke="#fff" stroke-width=".5" xlink:href="#c"/>
+            </g>
+            <circle cx="221.5" cy="57.5" fill="#fff" fill-opacity=".24" r="9.5"/>
+            <circle cx="221.5" cy="57.5" fill="#fff" r="4.5"/>
+            <path d="m35 91v17h94" stroke="#fff" stroke-width=".5"/>
+        </g>
+    </g>
+</svg>

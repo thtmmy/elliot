@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+{% load static %}
+{% block content %}
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="" />
+  <meta name="keywords" content="" />
+  <meta name="author" content="" />
+  <link rel="manifest" href="{% static 'manifest.json' %}" />
+  <link rel="icon" href="{% static 'images/logo/favicon.png' %}" type="image/x-icon" />
+  <title>Processing</title>
+  <link rel="apple-touch-icon" href="{% static 'images/logo/favicon.png' %}" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <meta name="apple-mobile-web-app-title" content="" />
+  <meta name="msapplication-TileImage" content="{% static 'images/logo/favicon.png' %}" />
+  <meta name="msapplication-TileColor" content="#000000" />
+  
+  <!-- Google font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  
+  <style>
+    :root {
+      --gold: #D4AF37;
+      --dark-gold: #B38B2D;
+      --black: #000000;
+      --dark-gray: #121212;
+      --light-gray: #1E1E1E;
+      --white: #FFFFFF;
+    }
+    
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: var(--black);
+      color: var(--white);
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+    }
+    
+    .custom-container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    /* Header Styles */
+    header {
+      background: linear-gradient(to right, var(--black), var(--dark-gray));
+      padding: 20px 0;
+      border-bottom: 1px solid var(--gold);
+    }
+    
+    .header-panel {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    
+    .back-btn {
+      position: absolute;
+      left: 0;
+      color: var(--gold);
+      font-size: 24px;
+      text-decoration: none;
+    }
+    
+    .header-panel h2 {
+      font-family: 'Playfair Display', serif;
+      color: var(--gold);
+      font-weight: 600;
+      margin: 0;
+    }
+    
+    /* Main Content */
+    .successfully-pay {
+      text-align: center;
+      padding: 40px 0;
+    }
+    
+    .pay-img {
+      max-width: 200px;
+      margin-bottom: 30px;
+    }
+    
+    /* Status Indicator */
+    .status-container {
+      background-color: var(--dark-gray);
+      border-radius: 10px;
+      padding: 20px;
+      margin: 30px 0;
+      border: 1px solid var(--gold);
+      text-align: center;
+    }
+    
+    .status-label {
+      display: block;
+      color: var(--gold);
+      margin-bottom: 10px;
+      font-weight: 500;
+      font-size: 1.2rem;
+    }
+    
+    .status-value {
+      font-family: 'Playfair Display', serif;
+      color: var(--gold);
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+    
+    /* Processing Animation */
+    .processing-animation {
+      display: inline-block;
+      position: relative;
+      width: 80px;
+      height: 80px;
+      margin: 20px 0;
+    }
+    
+    .processing-animation div {
+      position: absolute;
+      top: 33px;
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      background: var(--gold);
+      animation-timing-function: cubic-bezier(0, 1, 1, 0);
+    }
+    
+    .processing-animation div:nth-child(1) {
+      left: 8px;
+      animation: processing1 0.6s infinite;
+    }
+    
+    .processing-animation div:nth-child(2) {
+      left: 8px;
+      animation: processing2 0.6s infinite;
+    }
+    
+    .processing-animation div:nth-child(3) {
+      left: 32px;
+      animation: processing2 0.6s infinite;
+    }
+    
+    .processing-animation div:nth-child(4) {
+      left: 56px;
+      animation: processing3 0.6s infinite;
+    }
+    
+    @keyframes processing1 {
+      0% { transform: scale(0); }
+      100% { transform: scale(1); }
+    }
+    
+    @keyframes processing3 {
+      0% { transform: scale(1); }
+      100% { transform: scale(0); }
+    }
+    
+    @keyframes processing2 {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(24px, 0); }
+    }
+    
+    /* Button Styles */
+    .btn {
+      display: block;
+      padding: 15px;
+      text-align: center;
+      text-decoration: none;
+      font-weight: 600;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      margin-top: 20px;
+    }
+    
+    .theme-btn {
+      background-color: var(--gold);
+      color: var(--black);
+      border: 2px solid var(--gold);
+    }
+    
+    .theme-btn:hover {
+      background-color: var(--dark-gold);
+      border-color: var(--dark-gold);
+      color: var(--black);
+    }
+    
+    /* Loader Styles */
+    .loader-wrapper {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+    
+    .loader-img {
+      width: 100px;
+      height: 100px;
+    }
+    
+    /* Additional Info */
+    .processing-info {
+      margin-top: 30px;
+      color: #aaa;
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+    
+    .processing-info strong {
+      color: var(--gold);
+    }
+  </style>
+</head>
+
+<body>
+  <!-- loader start-->
+  <div class="loader-wrapper" id="loader">
+    <div class="loader">
+    </div>
+  </div>
+  <!-- loader end -->
+
+  <!-- header start -->
+  <header class="section-t-space">
+    <div class="custom-container">
+      <div class="header-panel">
+        <a href="{% url 'customer' %}" class="back-btn">
+          <i class="icon" data-feather="arrow-left"></i>
+        </a>
+        <h2>Transaction Processing</h2>
+      </div>
+    </div>
+  </header>
+  <!-- header end -->
+
+  <!-- payment status section starts -->
+  <section class="section-b-space">
+    <div class="custom-container">
+      <div class="status-container">
+        <span class="status-label">TRANSACTION STATUS</span>
+        <div class="status-value">PENDING</div>
+        <div class="processing-animation">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+      
+      <div class="successfully-pay">
+        <h3 style="color: var(--gold); margin-top: 20px;">Processing Your Transaction</h3>
+        <div class="processing-info">
+          <p><strong>Please do not refresh or close this page</strong></p>
+          <p>We are verifying your payment details. This may take a few moments.</p>
+        </div>
+      </div>
+      
+      <a href="{% url 'customer' %}" class="btn theme-btn successfully w-100">Cancel Transaction</a>
+    </div>
+  </section>
+  <!-- payment status section end -->
+
+  <script>
+    // Hide loader after page loads
+    document.addEventListener('DOMContentLoaded', function() {
+      setTimeout(function() {
+        document.getElementById('loader').style.display = 'none';
+      }, 1500);
+      
+      // You could add a check here for actual transaction status
+      // and redirect when complete, but keeping it as pending only
+    });
+  </script>
+
+  <!-- feather js -->
+  <script src="{% static 'js/processing/feather.min.js' %}"></script>
+  <script>
+    feather.replace();
+  </script>
+
+  <!-- loader js -->
+  <script src="{% static 'js/processing/loader.js' %}"></script>
+</body>
+{% endblock content %}
+</html>

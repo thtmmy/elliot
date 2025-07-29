@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+{% load static %}
+{%  block content %}
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+<!-- font-family: 'Open Sans', sans-serif; -->
+<link href="{% static 'css/bootstrap.min.css' %}" rel='stylesheet' type='text/css'>
+<link rel="stylesheet" type="text/css" href="" />
+<link href="{% static 'css/custom.css' %}" rel='stylesheet' type='text/css'>
+<link href="{% static 'css/default.css' %}" rel='stylesheet' type='text/css'>
+<link href="{% static 'css/tab.css' %}" rel='stylesheet' type='text/css'>
+<link rel="icon" href="../styles/images/favicon.png">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+<script src="{% static 'css/jquery.js' %}" type='text/javascript'></script>
+<script src="{% static 'css/setting2.js' %}" type='text/javascript'></script>
+<script src="{% static 'css/tab.js' %}" type='text/javascript'></script>
+<script src="{% static 'css/bootstrap.min.js' %}" type='text/javascript'></script>
+<style>
+  <style>
+    /* Main Container Styles */
+    .member-container {
+        background-color: #f8f9fa;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Account Top Section */
+    .account_top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-bottom: 30px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid #eaeaea;
+    }
+
+    .user_left h2 {
+        font-size: 24px;
+        color: #2c3e50;
+        margin: 0;
+    }
+
+    .user_left h2 span {
+        color: #4361ee;
+        font-weight: 600;
+    }
+
+    .affiliate_top {
+        background-color: #f1f5fe;
+        padding: 10px 15px;
+        border-radius: 6px;
+        font-size: 14px;
+    }
+
+    .ref-link {
+        color: #4361ee;
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+    .get_banners .btn-primary {
+        background-color: #4361ee;
+        border: none;
+        padding: 8px 20px;
+        border-radius: 6px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+
+    .get_banners .btn-primary:hover {
+        background-color: #3a56d4;
+        transform: translateY(-2px);
+    }
+
+    /* Deposit Container */
+    .deposit-container {
+        background-color: white;
+        border-radius: 10px;
+        padding: 30px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    .deposit-header {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .deposit-header h3 {
+        color: #2c3e50;
+        font-size: 22px;
+        font-weight: 700;
+        margin-bottom: 10px;
+    }
+
+    .deposit-header p {
+        color: #7f8c8d;
+        font-size: 16px;
+    }
+
+    /* QR Code Section */
+    .qr-code-container {
+        text-align: center;
+        margin: 25px 0;
+    }
+
+    .qr-code-container img {
+        border: 1px solid #eaeaea;
+        padding: 15px;
+        border-radius: 8px;
+        background-color: white;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Address Container */
+    .address-container {
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        padding: 20px;
+        margin: 25px auto;
+        max-width: 600px;
+        border: 1px dashed #d1d5db;
+    }
+
+    .address-container p {
+        text-align: center;
+        color: #6b7280;
+        margin-bottom: 15px;
+        font-size: 15px;
+    }
+
+    .input-group {
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    }
+
+    .wallet-address {
+        background-color: white;
+        border: 1px solid #e5e7eb;
+        padding: 12px 15px;
+        font-size: 16px;
+        font-weight: 500;
+        color: #2c3e50;
+        text-align: center;
+    }
+
+    .copy-btn {
+        background-color: #4361ee;
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+
+    .copy-btn:hover {
+        background-color: #3a56d4;
+    }
+
+    .copy-btn i {
+        margin-right: 5px;
+    }
+
+    /* Alert Message */
+    .alert-message {
+        background-color: #fff8e6;
+        color: #8a6d3b;
+        padding: 15px;
+        border-radius: 8px;
+        margin: 30px auto;
+        max-width: 600px;
+        border-left: 4px solid #ffc107;
+        font-size: 14px;
+    }
+
+    .alert-message i {
+        color: #ffc107;
+        margin-right: 8px;
+    }
+
+    /* Wallet Providers */
+    .wallet-providers {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 15px;
+        margin: 40px 0 30px;
+    }
+
+    .wallet-provider {
+        background-color: white;
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        padding: 12px 20px;
+        color: #4b5563;
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    }
+
+    .wallet-provider:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        color: #4361ee;
+        border-color: #4361ee;
+    }
+
+    .wallet-provider i {
+        margin-right: 8px;
+        font-size: 16px;
+    }
+
+    /* Network Stats */
+    .network-stats {
+        background-color: #2c3e50;
+        color: white;
+        padding: 25px;
+        border-radius: 10px;
+        margin-top: 40px;
+    }
+
+    .network-stats h4 {
+        color: white;
+        text-align: center;
+        margin-bottom: 25px;
+        font-size: 18px;
+        font-weight: 600;
+    }
+
+    .stat-item {
+        margin-bottom: 15px;
+        font-size: 15px;
+    }
+
+    .stat-value {
+        color: #4cc9f0;
+        font-weight: 600;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+        .account_top {
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .user_left, .affiliate_top, .get_banners {
+            width: 100%;
+            text-align: center;
+        }
+        
+        .deposit-container {
+            padding: 20px;
+        }
+        
+        .wallet-providers {
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .wallet-provider {
+            width: 100%;
+            justify-content: center;
+        }
+    }
+</style>
+</style>
+</head>
+<body class="loginarea" style="zoom: 1;">
+<div class="wrapper-account">
+  <div class="headerContainer">
+    <div class="headerInner"><a href="{% url 'customer' %}" id="logo"></a>
+      <div class="hdRight">
+        <div class="mainNavRight">
+          <div class="navbar">
+            <div class="navbar-inner">
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+ </div>
+
+<div class="inside_inner_account">
+<div class="member_wrap">
+<div class="membersidebar">
+  <ul>
+    <li><a href="{% url 'customer' %}">My Account</a></li><li><a href="{% url 'deposit' %}">Deposit</a></li><li><a href="{% url 'withdraw-history' %}">Deposits History</a></li><li><a href="{% url 'withdraw' %}">Withdraw</a></li><li></li><li><a href="{% url 'referals' %}">Referrals</a></li><li><a href="{% url 'logout' %}">Logout</a></li>
+</ul>
+</div>
+<div class="member-container">
+  <div class="account_top">
+      <div class="user_left">
+          <h2>Welcome, <span>{{ request.user.username }}</span></h2>
+      </div>
+      <div class="affiliate_top">
+          Affiliate Link: 
+          <a href="https://legaltrade.pythonanywhere.com/" class="ref-link">https://legaltrade.pythonanywhere.com/</a>
+      </div>
+      <div class="get_banners">
+          <a href="{% url 'referals' %}" class="btn btn-primary">Get Banners</a>
+      </div>
+  </div>
+  
+  <div class="deposit-container">
+      <div class="deposit-header">
+          <h3>Bitcoin Deposit</h3>
+          <p>Send Bitcoin to the address below to fund your account</p>
+      </div>
+      
+
+      <div class="address-container">
+          <p>Your Bitcoin Wallet Address:</p>
+          <div class="input-group">
+              <input type="text" class="form-control wallet-address" 
+                     value="{{ request.user.wallet.wallet }}" 
+                     id="walletAddress" readonly>
+              <div class="input-group-append">
+                  <button class="btn copy-btn" onclick="copyWalletAddress()">
+                      <i class="fas fa-copy"></i> Copy
+                  </button>
+              </div>
+          </div>
+      </div>
+      
+      <div class="alert-message">
+          <i class="fas fa-exclamation-circle"></i>
+          <strong>Important:</strong> Ensure to copy the address correctly to avoid payment errors. 
+          Only send Bitcoin (BTC) to this address.
+      </div>
+      
+      <div class="wallet-providers">
+          <a href="https://www.coinbase.com/" target="_blank" class="wallet-provider">
+              <i class="fab fa-bitcoin"></i> Coinbase
+          </a>
+          <a href="https://blockchain.info/" target="_blank" class="wallet-provider">
+              <i class="fas fa-wallet"></i> Blockchain
+          </a>
+          <a href="https://xapo.com/" target="_blank" class="wallet-provider">
+              <i class="fas fa-coins"></i> Xapo
+          </a>
+          <a href="https://airbitz.co/" target="_blank" class="wallet-provider">
+              <i class="fas fa-mobile-alt"></i> Airbitz
+          </a>
+      </div>
+      
+      <div class="network-stats">
+          <h4>Bitcoin Network Status</h4>
+          <div class="row">
+              <div class="col-md-6">
+                  <div class="stat-item">
+                      Market Cap: <span class="stat-value">$<span id="btc-market-cap">--</span></span>
+                  </div>
+                  <div class="stat-item">
+                      Hashrate: <span class="stat-value"><span id="btc-hashrate">--</span> TH/s</span>
+                  </div>
+              </div>
+              <div class="col-md-6">
+                  <div class="stat-item">
+                      Difficulty: <span class="stat-value"><span id="btc-difficulty">--</span></span>
+                  </div>
+                  <div class="stat-item">
+                      Network Speed: <span class="stat-value"><span id="btc-speed">--</span> PH/s</span>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+</div>
+</div>
+
+
+
+
+
+      <script>
+                            function myFunction() {
+                              var copyText = document.getElementById("myInput");
+                              copyText.select();
+                              copyText.setSelectionRange(0, 99999)
+                              document.execCommand("copy");
+                              alert("Copied the text: " + copyText.value);
+                            }
+                        </script>
+  <script type="text/javascript">
+$(document).ready(function() {
+
+    $('.accordion>dl>dt>a').click(function() 
+    {
+      $(this).toggleClass("rotate0");
+    });
+      /*------- parse price --------*/
+      function parsePriceCrypto()
+      {
+        returnString = "";
+        
+        $.post( "https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC,LTC,ETH,BCH,XRP&tsyms=USD", function( data )
+        {
+          $('#price_btc').text('$'+data['BTC']['USD']);
+          $('#price_ltc').text('$'+data['LTC']['USD']);
+          $('#price_eth').text('$'+data['ETH']['USD']);
+          $('#price_bch').text('$'+data['BCH']['USD']);
+          $('#price_xrp').text('$'+data['XRP']['USD']);
+        });
+      }
+      parsePriceCrypto();
+      
+      setInterval(function()
+      {
+        parsePriceCrypto();
+      }
+      , 5000);
+    });
+    
+    $('.language').click(function() {
+      $(this).toggleClass('active');
+    });
+    
+    $('.mobileMenu').click(function() {
+      $('.menu').toggleClass('mobile');
+      $(this).toggleClass('rotate');
+    });
+
+
+  </script> 
+  <!-- Smartsupp Live Chat script -->
+<script type="text/javascript">
+    var _smartsupp = _smartsupp || {};
+    _smartsupp.key = '95ca6d697d41b0ddb983064d803df5e94a3ba192';
+    window.smartsupp||(function(d) {
+      var s,c,o=smartsupp=function(){ o._.push(arguments)};o._=[];
+      s=d.getElementsByTagName('script')[0];c=d.createElement('script');
+      c.type='text/javascript';c.charset='utf-8';c.async=true;
+      c.src='https://www.smartsuppchat.com/loader.js?';s.parentNode.insertBefore(c,s);
+    })(document);
+    </script>
+    <noscript> Powered by <a href=“https://www.smartsupp.com” target=“_blank”>Smartsupp</a></noscript>
+<script>window.gtranslateSettings = {"default_language":"en","detect_browser_language":true,"wrapper_selector":".gtranslate_wrapper","flag_style":"3d"}</script>
+<script src="https://cdn.gtranslate.net/widgets/latest/float.js" defer></script>
+</body>
+{%  endblock content %}
+</html>

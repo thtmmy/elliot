@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+{% load static %}
+{%  block content %}
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+<!-- font-family: 'Open Sans', sans-serif; -->
+<link href="{% static 'css/bootstrap.min.css' %}" rel='stylesheet' type='text/css'>
+<link rel="stylesheet" type="text/css" href="" />
+<link href="{% static 'css/custom.css' %}" rel='stylesheet' type='text/css'>
+<link href="{% static 'css/default.css' %}" rel='stylesheet' type='text/css'>
+<link href="{% static 'css/tab.css' %}" rel='stylesheet' type='text/css'>
+<link rel="icon" href="../styles/images/favicon.png">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+<script src="{% static 'css/jquery.js' %}" type='text/javascript'></script>
+<script src="{% static 'css/setting2.js' %}" type='text/javascript'></script>
+<script src="{% static 'css/tab.js' %}" type='text/javascript'></script>
+<script src="{% static 'css/bootstrap.min.js' %}" type='text/javascript'></script>
+<style>
+    .container-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    color: #000;
+}
+
+.container-grid article {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 25px;
+    transition: transform 0.3s ease;
+}
+
+.container-grid article:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.signal {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.container-grid ul {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+.container-grid li {
+    margin-bottom: 12px;
+    display: flex;
+    align-items: flex-start;
+}
+
+.fa-check-circle {
+    color: dodgerblue;
+    margin-right: 10px;
+    margin-top: 3px;
+}
+
+.price {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.btn {
+    background: gold;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+
+.btn:hover {
+    background: gold;
+}
+
+/* For the countdown section */
+.countdown {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    margin: 20px auto;
+}
+
+.countdown ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+#address {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    text-align: center;
+    margin: 10px 0;
+}
+
+.countdown_btn {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    margin: 5px;
+    font-weight: bold;
+}
+</style>
+</head>
+<body class="loginarea" style="zoom: 1;">
+<div class="wrapper-account">
+  <div class="headerContainer">
+    <div class="headerInner"><a href="{% url 'customer' %}" id="logo"></a>
+      <div class="hdRight">
+        <div class="mainNavRight">
+          <div class="navbar">
+            <div class="navbar-inner">
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+ </div>
+
+<div class="inside_inner_account">
+<div class="member_wrap">
+<div class="membersidebar">
+  <ul>
+    <li><a href="{% url 'customer' %}">My Account</a></li><li><a href="{% url 'deposit' %}">Deposit</a></li><li><a href="{% url 'withdraw-history' %}">Deposits History</a></li><li><a href="{% url 'withdraw' %}">Withdraw</a></li><li></li><li><a href="{% url 'referals' %}">Referrals</a></li><li><a href="{% url 'logout' %}">Logout</a></li>
+</ul>
+</div>
+<div class="member-container">
+<div class="account_top">
+  <div class="user_left">
+    <h2>Welcome, <span>Test</span></h2>
+  </div>
+  <div class="affiliate_top">Affiliate Link:<a href="https://legaltrade.pythonanywhere.com/" class="ref-link">https://legaltrade.pythonanywhere.com/</a></div>
+  <div class="get_banners"><a href="{% url 'referals' %}">Get Banners</a></div>
+</div>
+<div class="member_right">
+    <div class="container">
+        <h3>TRADING SIGNAL PLANS</h3><br>
+        <div class="container-grid">
+             <article>
+                 <h4 style="color: dodgerblue" class="signal">1 Month Plan</h4>
+                 <ul>
+                     <li><i class="fa fa-check-circle"></i> Direct Trading Signals from the Brokerage.</li>
+                     <li><i class="fa fa-check-circle"></i> 24/7 access to trading.</li>
+                     <li><i class="fa fa-check-circle"></i> Increased asset leverage: up-to 70x.</li>
+                 </ul>
+                 <h4 style="color: var(--text)">Price: $<span class="price">1,500</span></h4>
+                 <center><a href="{% url 'deposit' %}"><button class="btn">BUY PLAN</button></a></center>
+             </article>
+ 
+             <article>
+                 <h4 style="color: dodgerblue" class="signal">2 Months Plan</h4>
+                 <ul>
+                     <li><i class="fa fa-check-circle"></i> Direct Trading Signals from the Brokerage.</li>
+                     <li><i class="fa fa-check-circle"></i> 24/7 access to trading.</li>
+                     <li><i class="fa fa-check-circle"></i> Exclusive Account manager features.</li>
+                     <li><i class="fa fa-check-circle"></i> Daily Market Reviews and Financial research.</li>
+                     <li><i class="fa fa-check-circle"></i> Increased asset leverage: up-to 70x.</li>
+                 </ul>
+                 <h4 style="color: var(--text)">Price: $<span class="price">2,000</span></h4>
+                 <center><a href="{% url 'deposit' %}"><button class="btn" >BUY PLAN</button></a></center>
+             </article>
+ 
+             <article>
+                 <h4 style="color: dodgerblue" class="signal">3 Months Plan</h4>
+                 <ul>
+                     <li><i class="fa fa-check-circle"></i> Direct Trading Signals from the Brokerage.</li>
+                     <li><i class="fa fa-check-circle"></i> 24/7 access to trading.</li>
+                     <li><i class="fa fa-check-circle"></i> Exclusive Account manager features.</li>
+                     <li><i class="fa fa-check-circle"></i> Daily Market Reviews and Financial research.</li>
+                     <li><i class="fa fa-check-circle"></i> Priority Futures Market trading.</li>
+                     <li><i class="fa fa-check-circle"></i> Increased asset leverage: up-to 70x.</li>
+                 </ul>
+                 <h4 style="color: var(--text)">Price: <strike style="color: red">$3,500</strike> $<span class="price">2,500</span></h4>
+                 <center><a href="{% url 'deposit' %}"><button class="btn">BUY PLAN</button></a></center>
+             </article>
+        </div>
+ 
+ 
+        <center>
+        <div class="countdown" style="display: none">
+            <h4>Payment will cancel in...</h4><br>
+               <ul>
+                  <li id="min">6</li>
+                  <li style="padding: 5px 10px">:</li>
+                  <li id="sec">38</li>
+               </ul><br>
+               <p>Generated Wallet Address</p>
+               <input type="text" value="" id="address"><br>
+               <button class="countdown_btn" onclick="myFunction()">Copy</button>
+               <div>
+                 <button class="countdown_btn" style="background: #26A69A" onclick="done_btn()">Done</button>
+                 <button class="countdown_btn" style="background: #EF5350" onclick="cancel_btn()">Cancel</button>
+               </div>
+        </div>
+        </center>
+  </div>
+
+</div><!--end column-70-->
+</div>
+</div>
+</div>
+
+</div><div class="contentBotContainer">
+  <div class="contentBotInner">
+    <div class="ctn-top-solid">
+      <h1>btc network </h1>
+      <h2> wallets: </h2>
+      <div class="solid-top">
+      <a href="https://www.coinbase.com/" class="solidTop1"></a> 
+      <a href="https://blockchain.info/" class="solidTop2"></a>
+      <a href="https://xapo.com/" class="solidTop3"></a>
+      <a href="https://airbitz.co/" class="solidTop4"></a>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="ctn-bot-solid">
+      <p>Market Cap: <span>$77829716960.00</span></p>
+      <p>Hashrate: <span>7108353254.76</span></p>
+      <p>Difficulty: <span>888171856257</span></p>
+      <p>Total Blocks: <span>482882</span> </p>
+      <p>Network Speed: <span>108.5 PH/s</span></p>
+    </div>
+  </div>
+</div>
+
+
+<div class="footerContainer">
+  <div class="footerInner">
+    <div class="ctn-footer-top">
+      <div class="ctn-ft-left">
+        <p>&copy; 2025 Stock Prime Ledger All Rights Reserved.</p>
+      </div>
+      <div class="ctn-ft-mid">
+      </div>
+      <div class="ft-solid">
+        <a href="https://www.facebook.com/VisualHyipcom/" target="_blank" class="per"></a>
+        <a href="https://twitter.com/" target="_blank" class="bit"></a>
+        
+      </div>
+      
+    </div>
+  </div>
+</div> <!-- end bot footer -->
+      <script>
+                            function myFunction() {
+                              var copyText = document.getElementById("myInput");
+                              copyText.select();
+                              copyText.setSelectionRange(0, 99999)
+                              document.execCommand("copy");
+                              alert("Copied the text: " + copyText.value);
+                            }
+                        </script>
+  <script type="text/javascript">
+$(document).ready(function() {
+
+    $('.accordion>dl>dt>a').click(function() 
+    {
+      $(this).toggleClass("rotate0");
+    });
+      /*------- parse price --------*/
+      function parsePriceCrypto()
+      {
+        returnString = "";
+        
+        $.post( "https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC,LTC,ETH,BCH,XRP&tsyms=USD", function( data )
+        {
+          $('#price_btc').text('$'+data['BTC']['USD']);
+          $('#price_ltc').text('$'+data['LTC']['USD']);
+          $('#price_eth').text('$'+data['ETH']['USD']);
+          $('#price_bch').text('$'+data['BCH']['USD']);
+          $('#price_xrp').text('$'+data['XRP']['USD']);
+        });
+      }
+      parsePriceCrypto();
+      
+      setInterval(function()
+      {
+        parsePriceCrypto();
+      }
+      , 5000);
+    });
+    
+    $('.language').click(function() {
+      $(this).toggleClass('active');
+    });
+    
+    $('.mobileMenu').click(function() {
+      $('.menu').toggleClass('mobile');
+      $(this).toggleClass('rotate');
+    });
+
+
+  </script> 
+<script>window.gtranslateSettings = {"default_language":"en","detect_browser_language":true,"wrapper_selector":".gtranslate_wrapper","flag_style":"3d"}</script>
+<script src="https://cdn.gtranslate.net/widgets/latest/float.js" defer></script>
+<!-- Smartsupp Live Chat script -->
+<script type="text/javascript">
+  var _smartsupp = _smartsupp || {};
+  _smartsupp.key = '95ca6d697d41b0ddb983064d803df5e94a3ba192';
+  window.smartsupp||(function(d) {
+    var s,c,o=smartsupp=function(){ o._.push(arguments)};o._=[];
+    s=d.getElementsByTagName('script')[0];c=d.createElement('script');
+    c.type='text/javascript';c.charset='utf-8';c.async=true;
+    c.src='https://www.smartsuppchat.com/loader.js?';s.parentNode.insertBefore(c,s);
+  })(document);
+  </script>
+  <noscript> Powered by <a href=“https://www.smartsupp.com” target=“_blank”>Smartsupp</a></noscript>
+</body>
+{%  endblock content %}
+</html>

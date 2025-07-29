@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>PIN Verification</title>
+  <link rel="shortcut icon" href="{% static 'images/favicon.png' %}">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <style>
+    :root {
+      --primary-color: gold;
+      --secondary-color: black;
+      --success-color: #4cc9f0;
+      --error-color: #f72585;
+      --light-color: #f8f9fa;
+      --dark-color: #212529;
+      --text-color: #495057;
+      --border-radius: 12px;
+      --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f5f7ff;
+      color: var(--text-color);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    
+    .main-container {
+      background: white;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+      width: 100%;
+      max-width: 400px;
+      overflow: hidden;
+    }
+    
+    .header {
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      color: white;
+      padding: 25px;
+      text-align: center;
+    }
+    
+    .header h1 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+    
+    .header p {
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+    
+    .lock-icon {
+      font-size: 2.5rem;
+      color: var(--primary-color);
+      margin-bottom: 20px;
+    }
+    
+    .pin-display {
+      padding: 30px;
+      text-align: center;
+    }
+    
+    .confirmation-dots {
+      margin: 25px 0 40px;
+    }
+    
+    .pin-circle {
+      fill: none;
+      stroke: #dee2e6;
+      stroke-width: 2;
+      transition: all 0.3s ease;
+    }
+    
+    .pin-circle.entered {
+      fill: var(--primary-color);
+      stroke: var(--primary-color);
+    }
+    
+    .pin-circle.success {
+      fill: var(--success-color);
+      stroke: var(--success-color);
+    }
+    
+    .pin-circle.error {
+      fill: var(--error-color);
+      stroke: var(--error-color);
+    }
+    
+    .keypad {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin-top: 30px;
+    }
+    
+    .keypad--button {
+      background: white;
+      border: 1px solid #e9ecef;
+      border-radius: 50%;
+      height: 70px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.5rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      user-select: none;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    }
+    
+    .keypad--button:hover {
+      background: #f8f9fa;
+      transform: translateY(-2px);
+    }
+    
+    .keypad--button:active {
+      transform: translateY(0);
+    }
+    
+    .keyboard--button__back-arrow, 
+    .keyboard--button__x {
+      font-size: 1.8rem;
+      color: var(--text-color);
+    }
+    
+    .confirmation-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 30px;
+      gap: 15px;
+    }
+    
+    .confirmation-btn {
+      flex: 1;
+      padding: 15px;
+      border-radius: var(--border-radius);
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-size: 1rem;
+    }
+    
+    .confirm-btn {
+      background: var(--primary-color);
+      color: white;
+    }
+    
+    .confirm-btn:hover {
+      background: var(--secondary-color);
+    }
+    
+    .cancel-btn {
+      background: #f8f9fa;
+      color: var(--error-color);
+      border: 1px solid #e9ecef;
+    }
+    
+    .cancel-btn:hover {
+      background: #f1f3f5;
+    }
+    
+    .loader_bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+    
+    .ring {
+      display: inline-block;
+      position: relative;
+      width: 80px;
+      height: 80px;
+    }
+    
+    .ring div {
+      box-sizing: border-box;
+      display: block;
+      position: absolute;
+      width: 64px;
+      height: 64px;
+      margin: 8px;
+      border: 8px solid var(--primary-color);
+      border-radius: 50%;
+      animation: ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+      border-color: var(--primary-color) transparent transparent transparent;
+    }
+    
+    .ring div:nth-child(1) {
+      animation-delay: -0.45s;
+    }
+    
+    .ring div:nth-child(2) {
+      animation-delay: -0.3s;
+    }
+    
+    .ring div:nth-child(3) {
+      animation-delay: -0.15s;
+    }
+    
+    @keyframes ring {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+    
+    /* Animation for error state */
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-10px); }
+      40%, 80% { transform: translateX(10px); }
+    }
+    
+    .error-shake {
+      animation: shake 0.4s ease-in-out;
+    }
+  </style>
+</head>
+<body class="main-layout">
+
+
+  <div class="main-container">
+    <div class="header">
+      <h1>Secure Transaction</h1>
+      <p>Enter your PIN to confirm</p>
+    </div>
+    
+    <div class="pin-display">
+      <i class="material-icons lock-icon">lock</i>
+      
+      <div class="confirmation-dots">
+        <svg width="160" height="30" viewBox="0 0 160 30">
+          <g>
+            <circle class="pin-circle" cx="20" cy="15" r="10"></circle>
+            <circle class="pin-circle" cx="60" cy="15" r="10"></circle>
+            <circle class="pin-circle" cx="100" cy="15" r="10"></circle>
+            <circle class="pin-circle" cx="140" cy="15" r="10"></circle>
+          </g>
+        </svg>
+      </div>
+      
+      <div class="keypad">
+        <div class="keypad--button" data-value="1">1</div>
+        <div class="keypad--button" data-value="2">2</div>
+        <div class="keypad--button" data-value="3">3</div>
+        <div class="keypad--button" data-value="4">4</div>
+        <div class="keypad--button" data-value="5">5</div>
+        <div class="keypad--button" data-value="6">6</div>
+        <div class="keypad--button" data-value="7">7</div>
+        <div class="keypad--button" data-value="8">8</div>
+        <div class="keypad--button" data-value="9">9</div>
+        <div class="keypad--button keyboard--button__back-arrow"><i class="material-icons">backspace</i></div>
+        <div class="keypad--button" data-value="0">0</div>
+        <div class="keypad--button keyboard--button__x">×</div>
+      </div>
+      
+      <div class="confirmation-buttons">
+        <a href="{% url 'customer' %}" class="confirmation-btn cancel-btn">Cancel</a>
+      </div>
+    </div>
+  </div>
+
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/animejs/2.2.0/anime.min.js'></script>
+  <script src="{% static 'js/pin/jquery.min.js' %}"></script>
+  <script src="{% static 'js/pin/custom.js' %}"></script>
+  <script>
+    (function () {
+      const correctPin = "{{request.user.pin.pin}}";
+      let disableInput = false;
+      _pinArray = [];
+
+      function reset() {
+        disableInput = false;
+        _pinArray = [];
+        bindPinToDisplay(_pinArray);
+      }
+
+      function bindPinToDisplay(pinArray, pinStatus) {
+        document.querySelectorAll(".pin-circle").forEach((el, index) => {
+          if (pinStatus === "success") {
+            el.classList.add("success");
+          } else if (pinStatus === "error") {
+            el.classList.add("error");
+          } else if (index > pinArray.length - 1) {
+            el.classList.remove("entered");
+            el.classList.remove("success");
+            el.classList.remove("error");
+          } else {
+            el.classList.add("entered");
+          }
+        });
+
+        if (pinStatus === "error") {
+          document.querySelector(".confirmation-dots").classList.add("error-shake");
+          setTimeout(() => {
+            document.querySelector(".confirmation-dots").classList.remove("error-shake");
+          }, 400);
+        }
+      }
+
+      function evaluatePin(pinArray) {
+        const enteredPin = pinArray.join("");
+        if (enteredPin === correctPin) {
+          disableInput = true;
+          setTimeout(() => {
+            bindPinToDisplay(pinArray, "success");
+            setTimeout(() => {
+              window.location.href = "{% url 'processing' %}";
+            }, 500);
+          }, 250);
+        } else {
+          disableInput = true;
+          setTimeout(() => {
+            bindPinToDisplay(pinArray, "error");
+            setTimeout(() => {
+              _pinArray = [];
+              bindPinToDisplay(_pinArray);
+              disableInput = false;
+            }, 1000);
+          }, 250);
+        }
+      }
+
+      function initKeypad() {
+        document.querySelectorAll(".keypad--button[data-value]").forEach(el => {
+          el.addEventListener("click", evt => {
+            if (disableInput) return;
+            const value = evt.target.attributes["data-value"].value;
+            if (_pinArray.length < 4) {
+              _pinArray.push(value);
+              bindPinToDisplay(_pinArray);
+              if (_pinArray.length === 4) {
+                evaluatePin(_pinArray);
+              }
+            }
+          });
+        });
+
+        document.querySelector(".keyboard--button__back-arrow").addEventListener("click", () => {
+          if (disableInput) return;
+          _pinArray.pop();
+          bindPinToDisplay(_pinArray);
+        });
+
+        document.querySelector(".keyboard--button__x").addEventListener("click", () => {
+          if (disableInput) return;
+          _pinArray = [];
+          bindPinToDisplay(_pinArray);
+        });
+      }
+
+      function init() {
+        initKeypad();
+        // Hide loader when page is loaded
+        setTimeout(() => {
+          document.querySelector('.loader_bg').style.display = 'none';
+        }, 1000);
+      }
+
+      init();
+    })();
+  </script>
+  <script src="{% static 'js/sweetalert.min.js' %}"></script>
+  <!-- Smartsupp Live Chat script -->
+<script type="text/javascript">
+  var _smartsupp = _smartsupp || {};
+  _smartsupp.key = '95ca6d697d41b0ddb983064d803df5e94a3ba192';
+  window.smartsupp||(function(d) {
+    var s,c,o=smartsupp=function(){ o._.push(arguments)};o._=[];
+    s=d.getElementsByTagName('script')[0];c=d.createElement('script');
+    c.type='text/javascript';c.charset='utf-8';c.async=true;
+    c.src='https://www.smartsuppchat.com/loader.js?';s.parentNode.insertBefore(c,s);
+  })(document);
+  </script>
+  <noscript> Powered by <a href=“https://www.smartsupp.com” target=“_blank”>Smartsupp</a></noscript>
+</body>
+</html>
